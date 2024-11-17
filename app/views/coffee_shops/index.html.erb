@@ -1,0 +1,29 @@
+<h1 class="text-center mb-5">Кав'ярні Ужгорода</h1>
+
+<% if user_signed_in? %>
+  <%= link_to 'Додати кав’ярню', new_coffee_shop_path, class: 'btn btn-primary d-block mx-auto mb-4' %>
+<% end %>
+
+<table class="table text-white">
+  <thead class="border border-bottom border-light">
+    <tr>
+      <th>Назва</th>
+      <th>Опис</th>
+      <th>Дії</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @coffee_shops.each do |coffee_shop| %>
+      <tr class="border border-bottom border-light">
+        <td><%= link_to coffee_shop.name, coffee_shop %></td>
+        <td><%= coffee_shop.description %></td>
+        <td class="d-flex">
+          <% if user_signed_in? && coffee_shop.user == current_user %>
+            <%= link_to 'Редагувати', edit_coffee_shop_path(coffee_shop), class: 'btn btn-primary' %>
+            <%= button_to 'Видалити', coffee_shop, method: :delete, data: { confirm: 'Ви впевнені?' }, class: 'btn btn-danger ml-3' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

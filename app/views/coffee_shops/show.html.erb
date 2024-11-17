@@ -1,0 +1,15 @@
+<h1><%= @coffee_shop.name %></h1>
+<p><%= @coffee_shop.description %></p>
+<% if @coffee_shop.photo.attached? %>
+  <div>
+    <h3>Фотографія:</h3>
+    <%= image_tag @coffee_shop.photo %> <!-- Відображаємо фотографію -->
+  </div>
+<% end %>
+
+<% if user_signed_in? && @coffee_shop.user == current_user %>
+  <%= link_to 'Редагувати', edit_coffee_shop_path(@coffee_shop), class: 'btn btn-secondary' %>
+  <%= button_to 'Видалити', @coffee_shop, method: :delete, data: { confirm: 'Ви впевнені?' }, class: 'btn btn-danger' %>
+<% end %>
+
+<%= link_to 'Назад', coffee_shops_path, class: 'btn btn-primary' %>

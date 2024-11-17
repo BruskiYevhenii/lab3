@@ -1,0 +1,31 @@
+<h1><%= action_name.capitalize %> кав’ярню</h1>
+
+<%= form_with(model: @coffee_shop, local: true) do |form| %>
+  <% if @coffee_shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coffee_shop.errors.count, "error") %> prohibited this coffee_shop from being saved:</h2>
+      <ul>
+        <% @coffee_shop.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: 'd-block btn btn-primary w-100 mb-4' %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Назад', coffee_shops_path, class: 'btn btn-secondary d-block' %>
